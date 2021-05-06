@@ -11,6 +11,8 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter(){
     override fun configure(http: HttpSecurity?) {
         http
                 ?.authorizeRequests()
+                ?.antMatchers("/","index","/css/*","/js/*")
+                ?.permitAll()
                 ?.anyRequest()
                 ?.authenticated()
                 ?.and()
