@@ -19,7 +19,7 @@ class SwaggerConfigurations {
         return Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.SpringBootSwagger2Use.controllers"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.SecurityVersion1.Student.controller"))
                 .paths(regex("/api/v1/students.*"))
                 .build()
 
