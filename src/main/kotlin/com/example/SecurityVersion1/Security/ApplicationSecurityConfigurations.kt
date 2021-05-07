@@ -29,10 +29,12 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
     }
     override fun configure(http: HttpSecurity?) {
         http
+                ?.csrf()?.disable() //We need to understand it
                 ?.authorizeRequests()
+                ?.antMatchers("/managment/**")?.hasAnyRole(ApplicationUserRoles.ADMIN.name,ApplicationUserRoles.ADMINTRAINEE.name)
+                ?.antMatchers("/api/**")?.hasRole(ApplicationUserRoles.STUDENT.name)
                 ?.antMatchers("/","index","/css/*","/js/*")
                 ?.permitAll()
-                ?.antMatchers("/api/**")?.hasRole(ApplicationUserRoles.STUDENT.name)
                 ?.anyRequest()
                 ?.authenticated()
                 ?.and()
