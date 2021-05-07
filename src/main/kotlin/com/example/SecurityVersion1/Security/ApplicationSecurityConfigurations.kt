@@ -1,5 +1,6 @@
 package com.example.SecurityVersion1.Security
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -8,12 +9,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 
 
 @Configuration
 @EnableWebSecurity
-class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter(){
+class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
+    private  val  passwordEncoder:PasswordEncoder
+
+
+    @Autowired
+    constructor(_passwordEncoder:PasswordEncoder){
+        /*
+          This will come from Password Configuration
+         */
+      
+        this.passwordEncoder = _passwordEncoder
+    }
     override fun configure(http: HttpSecurity?) {
         http
                 ?.authorizeRequests()
@@ -31,7 +44,7 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter(){
 
 
         var annSmithUser = User.withUsername("annaSmith")
-                .password("password").roles("STUDENT").build()
+                .password(passwordEncoder.encode("password")).roles("STUDENT").build()
 
         val userDetailsManager = InMemoryUserDetailsManager()
         userDetailsManager.createUser(annSmithUser)
