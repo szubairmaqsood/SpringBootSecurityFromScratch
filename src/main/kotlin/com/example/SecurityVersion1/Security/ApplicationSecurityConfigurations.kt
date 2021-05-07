@@ -24,7 +24,7 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
         /*
           This will come from Password Configuration
          */
-      
+
         this.passwordEncoder = _passwordEncoder
     }
     override fun configure(http: HttpSecurity?) {
@@ -46,8 +46,14 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
         var annSmithUser = User.withUsername("annaSmith")
                 .password(passwordEncoder.encode("password")).roles("STUDENT").build()
 
+        var lindaUser = User.withUsername("linda")
+                .password(passwordEncoder.encode("password")).roles("ADMIN").build()
+
+
+
         val userDetailsManager = InMemoryUserDetailsManager()
         userDetailsManager.createUser(annSmithUser)
+        userDetailsManager.createUser(lindaUser)
 
         return userDetailsManager
     }
