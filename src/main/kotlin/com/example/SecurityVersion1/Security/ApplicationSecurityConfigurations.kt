@@ -32,6 +32,7 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
                 ?.authorizeRequests()
                 ?.antMatchers("/","index","/css/*","/js/*")
                 ?.permitAll()
+                ?.antMatchers("/api/**")?.hasRole(ApplicationUserRoles.STUDENT.name)
                 ?.anyRequest()
                 ?.authenticated()
                 ?.and()
