@@ -10,7 +10,13 @@ enum class ApplicationUserRoles {
             ,ApplicationUserPermission.COURSE_WRITE
             ,ApplicationUserPermission.STUDENT_READ
             ,ApplicationUserPermission.STUDENT_WRITE)
-        );
+        ),
+    ADMINTRAINEE(
+    Sets.newHashSet(
+             ApplicationUserPermission.COURSE_READ
+            ,ApplicationUserPermission.STUDENT_READ
+                )
+    );
 
     var permission:Set<ApplicationUserPermission>
         public get() = field

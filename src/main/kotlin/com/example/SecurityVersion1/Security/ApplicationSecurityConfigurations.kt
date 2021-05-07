@@ -46,15 +46,21 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
 
         var annSmithUser = User.withUsername("annaSmith")
                 .password(passwordEncoder.encode("password")).roles(ApplicationUserRoles.STUDENT.name).build()
+        //ROLE_STUDENT
 
         var lindaUser = User.withUsername("linda")
                 .password(passwordEncoder.encode("password")).roles(ApplicationUserRoles.ADMIN.name).build()
+        //ROLE_ADMIN
 
+        var tomUser = User.withUsername("tom")
+                .password(passwordEncoder.encode("password")).roles(ApplicationUserRoles. ADMINTRAINEE.name).build()
+      //ROLE_ADMINTRAINEE
 
 
         val userDetailsManager = InMemoryUserDetailsManager()
         userDetailsManager.createUser(annSmithUser)
         userDetailsManager.createUser(lindaUser)
+        userDetailsManager.createUser(tomUser)
 
         return userDetailsManager
     }
