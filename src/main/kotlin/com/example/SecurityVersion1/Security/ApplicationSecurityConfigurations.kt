@@ -44,10 +44,10 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
 
 
         var annSmithUser = User.withUsername("annaSmith")
-                .password(passwordEncoder.encode("password")).roles("STUDENT").build()
+                .password(passwordEncoder.encode("password")).roles(ApplicationUserRoles.STUDENT.name).build()
 
         var lindaUser = User.withUsername("linda")
-                .password(passwordEncoder.encode("password")).roles("ADMIN").build()
+                .password(passwordEncoder.encode("password")).roles(ApplicationUserRoles.ADMIN.name).build()
 
 
 
