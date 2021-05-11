@@ -12,10 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
-
-
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+
 class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
     private  val  passwordEncoder:PasswordEncoder
 
@@ -33,10 +34,10 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
                 ?.csrf()?.disable() //We need to understand it
                 ?.authorizeRequests()
 
-                ?.antMatchers(HttpMethod.DELETE,"/managment/**")?.hasAuthority(ApplicationUserPermission.STUDENT_WRITE.permission)
-                ?.antMatchers(HttpMethod.POST,"/managment/**")?.hasAuthority(ApplicationUserPermission.STUDENT_WRITE.permission)
-                ?.antMatchers(HttpMethod.PUT,"/managment/**")?.hasAuthority(ApplicationUserPermission.STUDENT_WRITE.permission)
-                ?.antMatchers(HttpMethod.GET,"/managment/**")?.hasAnyRole(ApplicationUserRoles.ADMIN.name,ApplicationUserRoles.ADMINTRAINEE.name)
+                //?.antMatchers(HttpMethod.DELETE,"/managment/**")?.hasAuthority(ApplicationUserPermission.STUDENT_WRITE.permission)
+                //?.antMatchers(HttpMethod.POST,"/managment/**")?.hasAuthority(ApplicationUserPermission.STUDENT_WRITE.permission)
+                //?.antMatchers(HttpMethod.PUT,"/managment/**")?.hasAuthority(ApplicationUserPermission.STUDENT_WRITE.permission)
+                //?.antMatchers(HttpMethod.GET,"/managment/**")?.hasAnyRole(ApplicationUserRoles.ADMIN.name,ApplicationUserRoles.ADMINTRAINEE.name)
 
                 ?.antMatchers("/api/**")?.hasRole(ApplicationUserRoles.STUDENT.name)
                 ?.antMatchers("/","index","/css/*","/js/*")?.permitAll()
