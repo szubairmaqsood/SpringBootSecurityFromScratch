@@ -32,6 +32,8 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
     override fun configure(http: HttpSecurity?) {
         http
                 ?.csrf()?.disable() //We need to understand it
+               // ?.csrf()?.(org.springframework.security.web.csrf.CookieCsrfTokenRepository.withHttpOnlyFalse())
+               // .?and()
                 ?.authorizeRequests()
 
                 //?.antMatchers(HttpMethod.DELETE,"/managment/**")?.hasAuthority(ApplicationUserPermission.STUDENT_WRITE.permission)
@@ -44,7 +46,8 @@ class ApplicationSecurityConfigurations :WebSecurityConfigurerAdapter{
                 ?.anyRequest()
                 ?.authenticated()
                 ?.and()
-                ?.httpBasic()
+                //?.httpBasic()
+                ?.formLogin()
     }
 
     @Bean
